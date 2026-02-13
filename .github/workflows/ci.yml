@@ -11,8 +11,8 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: "22"
       - run: npx --yes eslint content.js popup.js sites/*.js
@@ -21,7 +21,7 @@ jobs:
     name: Package
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Create extension zip
         run: |
           zip -r hayame.zip \
@@ -29,7 +29,7 @@ jobs:
             content.js content.css \
             popup.html popup.css popup.js \
             sites/ icons/
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: hayame-extension
           path: hayame.zip
