@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npx --yes eslint content.js popup.js sites/*.js
+
+  package:
+    name: Package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create extension zip
+        run: |
+          zip -r hayame.zip \
+            manifest.json \
+            content.js content.css \
+            popup.html popup.css popup.js \
+            sites/ icons/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hayame-extension
+          path: hayame.zip

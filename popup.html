@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup">
+    <div class="title">Hayame</div>
+    <div class="speed-display" id="speed">1.0x</div>
+    <div class="controls">
+      <button id="slower">-</button>
+      <button id="reset">1.0</button>
+      <button id="faster">+</button>
+    </div>
+    <div class="shortcuts">
+      <span><kbd>Shift</kbd>+<kbd>D</kbd> +0.1</span>
+      <span><kbd>Shift</kbd>+<kbd>S</kbd> -0.1</span>
+      <span><kbd>Shift</kbd>+<kbd>A</kbd> Reset</span>
+      <span><kbd>Shift</kbd>+<kbd>Z</kbd> -10s</span>
+      <span><kbd>Shift</kbd>+<kbd>C</kbd> +10s</span>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
