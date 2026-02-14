@@ -6,6 +6,20 @@
   "permissions": ["storage"],
   "content_scripts": [
     {
+      "matches": ["*://*.abema.tv/*"],
+      "js": ["sites/abema.js"],
+      "all_frames": true,
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["*://*.amazon.co.jp/*", "*://*.amazon.com/*", "*://*.primevideo.com/*"],
+      "js": ["sites/prime-video-ratechange-blocker.js"],
+      "all_frames": true,
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
       "matches": ["<all_urls>"],
       "js": ["sites/youtube.js", "sites/prime-video.js", "content.js"],
       "css": ["content.css"],
