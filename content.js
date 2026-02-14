@@ -237,7 +237,7 @@
       adSkipper = createYouTubeAdSkipper(controller);
       adSkipper.init();
     } else if (
-      (host.includes("amazon.co") || host.includes("primevideo.com")) &&
+      (host.includes("amazon.co") || host.includes("amazon.com") || host.includes("primevideo.com")) &&
       typeof createPrimeVideoAdSkipper === "function"
     ) {
       adSkipper = createPrimeVideoAdSkipper(controller);
