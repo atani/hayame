@@ -13,7 +13,7 @@
   const managedVideos = new WeakSet();
   const indicators = new WeakMap();
   const controls = new WeakMap();
-  let hideTimer = 0;
+  const hideTimers = new WeakMap();
   let helpEl = null;
   let helpVisible = false;
 
@@ -86,9 +86,9 @@
     el.textContent = text;
     el.classList.toggle("vsc-ad", isAd);
     el.classList.add("vsc-visible");
-    clearTimeout(hideTimer);
+    clearTimeout(hideTimers.get(video));
     if (!isAd) {
-      hideTimer = setTimeout(() => el.classList.remove("vsc-visible"), INDICATOR_DURATION);
+      hideTimers.set(video, setTimeout(() => el.classList.remove("vsc-visible"), INDICATOR_DURATION));
     }
   }
 
