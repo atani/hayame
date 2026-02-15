@@ -10,6 +10,13 @@ Or load manually:
 1. `chrome://extensions` → Developer mode ON
 2. "Load unpacked" → select this folder
 
+## Features
+
+- **Overlay Controls** — Hover the top-left corner of a video to reveal speed controls (±0.1 / ±0.5 / reset)
+- **Popup** — Change speed and configure options from the extension icon
+- **Speed Reset** — Speed resets to 1.0x on navigation by default (enable "Remember speed" to persist)
+- **Site Adapters** — Some sites show additional options in the popup
+
 ## Keyboard Shortcuts
 
 | Key | Action |
