@@ -1,6 +1,6 @@
 .vsc-indicator {
   position: absolute;
-  top: 8px;
+  top: 36px;
   left: 8px;
   z-index: 2147483647;
   background: rgba(0, 0, 0, 0.7);
@@ -19,6 +19,45 @@
 
 .vsc-indicator.vsc-ad {
   background: rgba(200, 30, 30, 0.85);
+}
+
+.hayame-ctrl {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2147483646;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  opacity: 0;
+  pointer-events: auto;
+  transition: opacity 0.3s;
+}
+
+.hayame-ctrl:hover {
+  opacity: 1;
+}
+
+.hayame-ctrl-btn {
+  all: unset;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font: bold 11px/1 sans-serif;
+  padding: 4px 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.hayame-ctrl-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.hayame-ctrl-display {
+  min-width: 36px;
+  text-align: center;
+  color: #2cb67d;
 }
 
 .hayame-help {

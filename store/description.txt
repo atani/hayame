@@ -1,0 +1,36 @@
+Hayame - a lightweight video speed controller that just works.
+
+Control playback speed on any website with simple keyboard shortcuts. No complex injection, no site-breaking hacks - just direct playbackRate control.
+
+== Features ==
+
+- Speed up/down in 0.1x increments
+- Works on any website with HTML5 video
+- Speed persists across page navigation
+- On-screen indicator shows current speed
+- Popup UI for quick adjustments
+- Help overlay (Shift+\)
+- Zero permissions beyond storage
+
+== Keyboard Shortcuts ==
+
+Shift+D : Speed up (+0.1)
+Shift+S : Slow down (-0.1)
+Shift+A : Reset to 1.0x (press again to restore previous speed)
+Shift+Z : Rewind 10 seconds
+Shift+C : Forward 10 seconds
+Shift+\ : Toggle help overlay
+
+Shortcuts are disabled when typing in text fields.
+
+== Why Hayame? ==
+
+Other speed controllers use complex injection bridges, synthetic events, and site-specific hacks that break video players. Hayame takes a different approach: it sets video.playbackRate directly. That's it. No ratechange listeners, no event synthesis, no Shadow DOM manipulation.
+
+Simple, fast, reliable.
+
+== Privacy ==
+
+Hayame only uses chrome.storage.local to remember your preferred speed. No data is collected, no analytics, no network requests.
+
+Open source: https://github.com/atani/hayame
