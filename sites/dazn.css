@@ -1,0 +1,4 @@
+/* DAZN: Hide FanZone sidebar (toggled via popup setting) */
+body.hayame-hide-fanzone aside[class*="player-aside"] {
+  display: none !important;
+}

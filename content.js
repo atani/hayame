@@ -12,6 +12,7 @@
   let adSkipper = null;
   const managedVideos = new WeakSet();
   const indicators = new WeakMap();
+  const controls = new WeakMap();
   let hideTimer = 0;
   let helpEl = null;
   let helpVisible = false;
@@ -37,15 +38,33 @@
     chrome.storage.local.set({ speed });
     applyAll();
     showIndicatorAll(speed.toFixed(1) + "x", false);
+    updateControlsAll();
+  }
+
+  // --- DOM helpers ---
+
+  function findControlParent(video) {
+    const vw = video.offsetWidth || video.clientWidth;
+    const vh = video.offsetHeight || video.clientHeight;
+    let el = video.parentElement;
+    while (el && el !== document.body) {
+      const st = getComputedStyle(el);
+      const ew = el.offsetWidth || el.clientWidth;
+      const eh = el.offsetHeight || el.clientHeight;
+      if (ew >= vw * 0.8 && eh >= vh * 0.8 && st.overflow !== "hidden") {
+        return el;
+      }
+      el = el.parentElement;
+    }
+    return video.parentElement;
   }
 
   // --- Indicator ---
 
   function ensureIndicator(video) {
     if (indicators.has(video)) return indicators.get(video);
-    const parent = video.parentElement;
+    const parent = findControlParent(video);
     if (!parent) return null;
-    // Ensure parent is positioned
     const pos = getComputedStyle(parent).position;
     if (pos === "static") parent.style.position = "relative";
     const el = document.createElement("div");
@@ -73,6 +92,63 @@
     }
   }
 
+  // --- Speed control widget ---
+
+  function ensureControls(video) {
+    if (controls.has(video)) return controls.get(video);
+    const parent = findControlParent(video);
+    if (!parent) return null;
+    const pos = getComputedStyle(parent).position;
+    if (pos === "static") parent.style.position = "relative";
+
+    const wrap = document.createElement("div");
+    wrap.className = "hayame-ctrl";
+
+    const btnDefs = [
+      { label: "-0.5", delta: -0.5 },
+      { label: "-0.1", delta: -0.1 },
+      { label: null, delta: 0 },
+      { label: "+0.1", delta: 0.1 },
+      { label: "+0.5", delta: 0.5 },
+    ];
+
+    let display;
+    for (const def of btnDefs) {
+      const btn = document.createElement("button");
+      btn.className = "hayame-ctrl-btn";
+      if (def.label === null) {
+        btn.className += " hayame-ctrl-display";
+        btn.textContent = speed.toFixed(1) + "x";
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          setSpeed(1.0);
+        });
+        display = btn;
+      } else {
+        btn.textContent = def.label;
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          setSpeed(speed + def.delta);
+        });
+      }
+      wrap.appendChild(btn);
+    }
+
+    parent.appendChild(wrap);
+    controls.set(video, display);
+    return display;
+  }
+
+  function updateControlsAll() {
+    const text = speed.toFixed(1) + "x";
+    for (const v of document.querySelectorAll("video")) {
+      const display = controls.get(v);
+      if (display) display.textContent = text;
+    }
+  }
+
   // --- Controller interface for site modules ---
 
   const controller = {
@@ -86,6 +162,7 @@
     if (managedVideos.has(video)) return;
     managedVideos.add(video);
     applySpeed(video);
+    ensureControls(video);
   }
 
   function scan() {
@@ -221,8 +298,13 @@
   // --- Init ---
 
   async function init() {
-    const stored = await chrome.storage.local.get({ speed: 1.0 });
-    speed = stored.speed;
+    const stored = await chrome.storage.local.get({ speed: 1.0, rememberSpeed: false });
+    if (stored.rememberSpeed) {
+      speed = stored.speed;
+    } else {
+      speed = 1.0;
+      chrome.storage.local.set({ speed: 1.0 });
+    }
 
     scan();
     mo.observe(document.body || document.documentElement, {
@@ -231,8 +313,21 @@
     });
     document.addEventListener("keydown", onKeyDown, true);
 
-    // Init site-specific ad skipper
+    // Site-specific features
     const host = location.hostname;
+
+    // DAZN: FanZone toggle
+    if (host.includes("dazn.com")) {
+      const { daznFanZone } = await chrome.storage.local.get({ daznFanZone: false });
+      document.body.classList.toggle("hayame-hide-fanzone", !daznFanZone);
+      chrome.storage.onChanged.addListener((changes) => {
+        if (changes.daznFanZone) {
+          document.body.classList.toggle("hayame-hide-fanzone", !changes.daznFanZone.newValue);
+        }
+      });
+    }
+
+    // Init site-specific ad skipper
     if (host.includes("youtube.com") && typeof createYouTubeAdSkipper === "function") {
       adSkipper = createYouTubeAdSkipper(controller);
       adSkipper.init();
