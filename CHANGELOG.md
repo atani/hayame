@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/atani/hayame/compare/v1.1.0...v1.1.1) (2026-02-21)
+
+
+### Bug Fixes
+
+* 速度コントロール非表示時のクリックブロックを修正 ([#10](https://github.com/atani/hayame/issues/10)) ([cc1b14d](https://github.com/atani/hayame/commit/cc1b14defc2bd2e2a2fc3e487a83c89a91c745e1))
+
 ## [1.1.0](https://github.com/atani/hayame/compare/v1.0.0...v1.1.0) (2026-02-15)
 
 
