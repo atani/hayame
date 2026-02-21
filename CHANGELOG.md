@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/atani/hayame/compare/v1.1.1...v1.1.2) (2026-02-21)
+
+
+### Bug Fixes
+
+* release-please PR の auto-merge が動作しない問題を修正 ([#14](https://github.com/atani/hayame/issues/14)) ([835e4b4](https://github.com/atani/hayame/commit/835e4b4f3a40f2681d79f9689bb15dc8711d81b4))
+
 ## [1.1.1](https://github.com/atani/hayame/compare/v1.1.0...v1.1.1) (2026-02-21)
 
 
