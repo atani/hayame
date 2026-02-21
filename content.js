@@ -101,6 +101,10 @@
     const pos = getComputedStyle(parent).position;
     if (pos === "static") parent.style.position = "relative";
 
+    if (!parent.classList.contains("hayame-ctrl-parent")) {
+      parent.classList.add("hayame-ctrl-parent");
+    }
+
     const wrap = document.createElement("div");
     wrap.className = "hayame-ctrl";
 

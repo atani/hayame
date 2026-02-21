@@ -29,13 +29,14 @@
   display: flex;
   align-items: center;
   gap: 2px;
-  opacity: 0;
-  pointer-events: auto;
+  opacity: 0 !important;
+  pointer-events: none;
   transition: opacity 0.3s;
 }
 
-.hayame-ctrl:hover {
-  opacity: 1;
+.hayame-ctrl-parent:hover > .hayame-ctrl {
+  opacity: 1 !important;
+  pointer-events: auto;
 }
 
 .hayame-ctrl-btn {
