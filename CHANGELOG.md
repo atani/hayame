@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.3](https://github.com/atani/hayame/compare/v1.1.2...v1.1.3) (2026-02-23)
+
+
+### Bug Fixes
+
+* Prime Video の広告検知で非表示要素を誤検知する問題を修正 ([#18](https://github.com/atani/hayame/issues/18)) ([b69d079](https://github.com/atani/hayame/commit/b69d079e5c5927cc1d6fa9b2303f41579dc3eb3e))
+* publish ワークフローを reusable workflow に統合 ([#16](https://github.com/atani/hayame/issues/16)) ([6c31486](https://github.com/atani/hayame/commit/6c31486e2f2896f9982a5c56d51c5ceea3407371))
+
 ## [1.1.2](https://github.com/atani/hayame/compare/v1.1.1...v1.1.2) (2026-02-21)
 
 
