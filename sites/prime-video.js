@@ -6,11 +6,17 @@ function createPrimeVideoAdSkipper(controller) {
   let pollTimer = null;
   let overlay = null;
 
+  function isVisible(el) {
+    return el && el.offsetParent !== null;
+  }
+
   function isAdPlaying() {
-    if (document.querySelector(".atvwebplayersdk-ad-timer")) return true;
-    if (document.querySelector(".atvwebplayersdk-ad-timer-ad-text")) return true;
-    if (document.querySelector('[class*="adBreak"]')) return true;
-    return false;
+    const selectors = [
+      ".atvwebplayersdk-ad-timer",
+      ".atvwebplayersdk-ad-timer-ad-text",
+      '[class*="adBreak"]',
+    ];
+    return selectors.some((sel) => isVisible(document.querySelector(sel)));
   }
 
   function tryClickSkip() {
