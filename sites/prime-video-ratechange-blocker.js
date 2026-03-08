@@ -3,15 +3,9 @@
 (() => {
   const origAddEventListener = HTMLVideoElement.prototype.addEventListener;
   const origRemoveEventListener = HTMLVideoElement.prototype.removeEventListener;
-  const blockedListeners = new WeakMap();
 
   HTMLVideoElement.prototype.addEventListener = function (type, listener, options) {
-    if (type === "ratechange") {
-      // Store so removeEventListener still works without errors
-      if (!blockedListeners.has(this)) blockedListeners.set(this, []);
-      blockedListeners.get(this).push(listener);
-      return;
-    }
+    if (type === "ratechange") return;
     return origAddEventListener.call(this, type, listener, options);
   };
 
