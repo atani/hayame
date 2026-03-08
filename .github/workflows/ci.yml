@@ -30,7 +30,7 @@ jobs:
             popup.html popup.css popup.js \
             sites/ icons/ \
             -x '*.DS_Store'
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: hayame-extension
           path: hayame.zip
