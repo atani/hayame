@@ -14,8 +14,6 @@ export default [
         clearInterval: "readonly",
         console: "readonly",
         HTMLVideoElement: "readonly",
-        Object: "readonly",
-        WeakMap: "readonly",
         MutationObserver: "readonly",
         getComputedStyle: "readonly",
         module: "readonly",

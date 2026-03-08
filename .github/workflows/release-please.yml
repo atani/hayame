@@ -34,7 +34,8 @@ jobs:
             manifest.json \
             content.js content.css \
             popup.html popup.css popup.js \
-            sites/ icons/
+            sites/ icons/ \
+            -x '*.DS_Store'
       - name: Upload Release Asset
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -28,7 +28,8 @@ jobs:
             manifest.json \
             content.js content.css \
             popup.html popup.css popup.js \
-            sites/ icons/
+            sites/ icons/ \
+            -x '*.DS_Store'
       - uses: actions/upload-artifact@v6
         with:
           name: hayame-extension
